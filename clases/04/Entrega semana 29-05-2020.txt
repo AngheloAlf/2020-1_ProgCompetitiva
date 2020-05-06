@@ -1,0 +1,8 @@
+Grupo 1
+Integrantes:
+- Anghelo Carvajal
+- Juan Pablo L.
+- Rodrigo Valenzuela
+
+https://codeforces.com/contest/960/submission/78481038
+https://codeforces.com/contest/527/submission/79084486
