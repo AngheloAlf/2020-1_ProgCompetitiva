@@ -39,6 +39,15 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "algorithm": "cpp",
-        "vector": "c"
+        "vector": "c",
+        "deque": "cpp",
+        "queue": "cpp",
+        "array": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
+        "unordered_map": "cpp",
+        "list": "cpp",
+        "xhash": "cpp",
+        "unordered_set": "cpp"
     }
 }
