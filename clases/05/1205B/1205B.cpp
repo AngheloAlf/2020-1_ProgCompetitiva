@@ -35,7 +35,9 @@ int main(){
         }
     }
 
-    std::unordered_map<int, std::vector<int>> grafo;
+    //std::unordered_map<int, std::vector<int>> grafo;
+    std::vector<std::vector<int>> grafo;
+    grafo.resize(n);
     bool tres_o_mas = false;
     bool al_menos_un_2 = false;
     for(unsigned i = 0; i < bits_por_nodo.size(); ++i){
@@ -49,16 +51,12 @@ int main(){
             auto x = bits_por_nodo[i][0];
             auto y = bits_por_nodo[i][1];
 
-            if(grafo.count(x) == 0){
-                grafo.insert({x, std::vector<int>()});
-            }
-            if(grafo.count(y) == 0){
-                grafo.insert({y, std::vector<int>()});
-            }
-            grafo.at(x).push_back(y);
-            grafo.at(y).push_back(x);
+            grafo[x].push_back(y);
+            grafo[y].push_back(x);
         }
     }
+
+    //std::cout << grafo.size() << std::endl;
 
     if(tres_o_mas){
         std::cout << 3 << std::endl;
@@ -71,6 +69,9 @@ int main(){
         std::vector<int> padre;
         std::vector<int> distancias;
         for(int i = 0; i < n; ++i){
+            if(grafo[i].empty()){
+                continue;
+            }
             padre.assign(n, -1);
             distancias.assign(n, GRANDE);
             distancias[i] = 0;
@@ -80,16 +81,17 @@ int main(){
             while(!cola.empty()){
                 int nodo = cola.front();
                 cola.pop();
-                if(grafo.count(nodo)){
-                    for(auto conectado: grafo.at(nodo)){
-                        if(distancias[conectado] == GRANDE){
-                            distancias[conectado] = distancias[nodo] + 1;
-                            padre[conectado] = nodo;
-                            cola.push(conectado);
-                        }
-                        else if(padre[nodo] != conectado && padre[conectado] != nodo){
-                            nodos_ciclo = MIN(nodos_ciclo, distancias[nodo] + distancias[conectado] + 1);
-                        }
+                if(grafo[nodo].empty()){
+                    continue;
+                }
+                for(auto conectado: grafo[nodo]){
+                    if(distancias[conectado] == GRANDE){
+                        distancias[conectado] = distancias[nodo] + 1;
+                        padre[conectado] = nodo;
+                        cola.push(conectado);
+                    }
+                    else if(padre[nodo] != conectado && padre[conectado] != nodo){
+                        nodos_ciclo = MIN(nodos_ciclo, distancias[nodo] + distancias[conectado] + 1);
                     }
                 }
             }

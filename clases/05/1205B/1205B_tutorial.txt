@@ -1,0 +1,9 @@
+Primero, nos dicen que los $n$ nodos pueden llegar a estar conectados entre si (exceptuándose a si mismo), dependiendo de si al realizar una operación AND a nivel de bit entre dos nodos, esta resulta distinta a cero. 
+
+Por lo tanto, un nodo $a_i$ estaría conectado con todos los nodos que tengan al menos un bit encendido en común con $a_i$, o visto de otra forma, todos los bits encendidos de $a_i$ estarían conectados con $a_i$. 
+
+Saber cuantos nodos están conectados a través del mismo bit es información muy útil. Si hay 3 o más nodos con el mismo bit en común, significa que esos nodos están interconectados todos con todos, por lo que existe un ciclo de tamaño 3 (el más pequeño que puede existir), por lo que esta es la respuesta. Si desde un principio almacenamos los nodos según sus bits, podemos verificar lo anterior en complejidad O(60), filtrando muchos casos y ahorrándonos la búsqueda en profundidad.
+
+Si la condición anterior no se cumple, hay que buscar el ciclo más corto usando algoritmos de grafos, pero como filtramos una gran cantidad de casos con el filtro anterior, no debería ser tan lento este proceso. Hacer $n$ veces un BFS debería bastar.
+
+Como tip para generar el grafo, en vez de usar el número leído por stdin como identificador para el nodo, asignale ids de forma lineal, partiendo en cero. Por ejemplo, si tienes 5 nodos, asigna los números 0, 1, 2, 3 y 4 como ids para esos nodos. De esta manera, puedes usar estructuras de datos lineales, como vectores, que tienen complejidad de acceso O(1) garantizado, en vez de usar otro tipo de estructuras, las cuales no son garantizadamente constantes en complejidad.
